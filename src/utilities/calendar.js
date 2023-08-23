@@ -7,15 +7,22 @@ function generateDate (month = dayjs().month(),year = dayjs().year()){
     console.log(lastDateOfMonth.date(32))
     //prefix date
     for (let i =0; i< firstDateOfMonth.day();i++){
-        arrayOfDate.push(firstDateOfMonth.day(i))
+        arrayOfDate.push({
+            date: firstDateOfMonth.date(i), 
+            currentMonth: false})
     }
     for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++){
-        arrayOfDate.push(firstDateOfMonth.date(i))
+        arrayOfDate.push({ 
+            date: firstDateOfMonth.date(i), 
+            currentMonth:true,
+            today: firstDateOfMonth.date(i).toDate().toDateString() === dayjs().toDate().toDateString()})
     }
     //generate suffix date
     const remaining = 42 - arrayOfDate.length
     for (let i = lastDateOfMonth.date()+1; i<= lastDateOfMonth.date() + remaining; i++){
-        arrayOfDate.push(lastDateOfMonth.date(i))
+        arrayOfDate.push({
+            date: lastDateOfMonth.date(i), 
+            currentMonth:false})
     }
     return arrayOfDate
 }
